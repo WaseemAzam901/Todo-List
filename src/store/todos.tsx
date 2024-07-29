@@ -17,7 +17,7 @@ export type TodosContext = {
 export const todosContext = createContext<TodosContext | null>(null);
 
 //Creating Provider Function
-export const TodosProvider =(children:{children:ReactNode}) => {
+export const TodosProvider =({children}:{children:ReactNode}) => {
 
     const [todos, setTodos] = useState<Todo[]>([])
 
