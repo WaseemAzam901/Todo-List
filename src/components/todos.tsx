@@ -1,14 +1,22 @@
-// import { useTodos } from '@/store/todos'
-import React from 'react'
+"use client"
+import { useTodos } from '@/store/todos'
 
-const todos = () => {
-    // const {todos} = useTodos();
+
+const Todos = () => {
+    const {todos} = useTodos();
     // console.log(todos);
+    let filter = todos;
   return (
     <>
-    <ul></ul>
+    <ul>
+      {
+        filter.map((todo)=> {
+          return <li key={todo.id}>{todo.task}</li>
+        })
+      }
+    </ul>
     </>
   )
 }
 
-export default todos
+export default Todos
