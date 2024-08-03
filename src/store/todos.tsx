@@ -35,8 +35,21 @@ export const TodosProvider =({children}:{children:ReactNode}) => {
             ...prev]
             return newTodos;
         })
+
+        };
+        const toggleTodoAsCompleted = (id:string)=>{
+            setTodos((prev)=> {
+                const newTodos = prev.map((task)=> {
+                    if (task.id ==id){
+                        return{...task, completed: !task.completed}
+                    }
+                    return task;
+                })
+                return newTodos;
+            })
+        }
         
-    };
+    
     return(
     <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted}}>
         {children}
@@ -45,9 +58,7 @@ export const TodosProvider =({children}:{children:ReactNode}) => {
 }
 
 
-export const toggleTodoAsCompleted = (id:string)=>{
-    // setTodos((prev)=> {})
-}
+
 
 export function useTodos() {
     const todosContextValue = useContext(todosContext)
