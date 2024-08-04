@@ -12,6 +12,7 @@ export type TodosContext = {
     todos: Todo[];
     handleAddTodo: (task: string) => void;
     toggleTodoAsCompleted : (id:string) => void;
+    handleTodoDelete : (id:string) => void;
 }
 
 // Creating Context
@@ -48,10 +49,16 @@ export const TodosProvider =({children}:{children:ReactNode}) => {
                 return newTodos;
             })
         }
+        const handleTodoDelete =(id:string)=> {
+            setTodos((prev)=> {
+                const newTodos = prev.filter((task)=> task.id !==id)
+                return newTodos;
+            })
+        }
         
     
     return(
-    <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted}}>
+    <todosContext.Provider value={{todos, handleAddTodo, toggleTodoAsCompleted, handleTodoDelete}}>
         {children}
     </todosContext.Provider>
     );
