@@ -1,16 +1,28 @@
 "use client"
 import { useTodos } from '@/store/todos'
+import { useSearchParams } from 'next/navigation';
 
 
 const Todos = () => {
     const {todos, toggleTodoAsCompleted, handleTodoDelete} = useTodos();
     // console.log(todos);
-    let filter = todos;
+    let filterTodos = todos;
+    console.log(filterTodos)
+    const searchParams = useSearchParams();
+    const todosFilter = searchParams.get("todos");
+
+    if(todosFilter === "active"){
+      filterTodos = filterTodos.filter((todos)=> !todos.completed)
+    }else if(todosFilter === "completed") {
+      filterTodos = filterTodos.filter((todos)=> todos.completed)
+    }
+
+
   return (
     <>
     <ul>
       {
-        filter.map((todo)=> {
+        filterTodos.map((todo)=> {
           return <li key={todo.id}>
             {/* dekho hum ny input feild ko id is liye di kyu k hum neechay label use kar rahay hain aur humain pata hai k label aur input feild ki id same hoti hai tabhi woh eik dusray k saath aatay hain */}
             {/* id main dekho todo same rahay gah aur todo.id ki madad say number aye gah means todo-0.98762 is tarhan */}

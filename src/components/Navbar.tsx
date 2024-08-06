@@ -8,16 +8,17 @@ const Navbar = () => {
     const serachParams = useSearchParams();
     // ab todos k equal to k baad jo data hai i.e active yeh completed woh humain is main mil jaye gah
     const todosFilter = serachParams.get("todos")
+    console.log("Navbar" + todosFilter);
 
 
     return (
     <>
-    <Link href="/">Home</Link>
+    <Link href="/" className={todosFilter === null ? "text-red-600" : ""}>Home</Link>
     {/* yahan yeh jo hai issay  /?todos=active* query parameter kehtay hain is main key value pair hota hai yeh hamesha ? say start hota hai */}
     {/* is main key todos hai aur value active is query parameter say hoga bus yeh k jab hum is active link per click karain gy toh url main http://localhost:3000/?todos=active likha ajaye gah*/}
     {/* agar na samaj aye toh video 1:07:00 say dekh lena is*/}
-    <Link href="/?todos=active">Active</Link>
-    <Link href="/?todos=completed">Completed</Link>
+    <Link href="/?todos=active" className={todosFilter === "active" ? "text-red-600" :""}>Active</Link>
+    <Link href="/?todos=completed" className={todosFilter === "completed" ? "text-red-600" : ""}>Completed</Link>
     </>
   )
 }
